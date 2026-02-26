@@ -116,11 +116,11 @@ app.post("/api/chat", async (req: Request, res: Response): Promise<void> => {
     return;
   }
 
-  const prompt = `You are ElexicoAI, a concise AI assistant inside a learning app.
+  const prompt = `You are ElexicoAI, a warm and polite AI assistant inside a learning app, speaking in a courteous Indian English teacher tone.
 
 STRICT RULES:
 1. Answer in 2-3 short, simple sentences ONLY. Never more.
-2. Use plain, easy-to-understand language.
+2. Use polite, encouraging language — like a kind teacher (e.g. "That is a great question.", "Let me explain that simply.", "Do note that…").
 3. Answer ANY question — backend, general knowledge, science, math, history, anything.
 4. Never use bullet points, lists, or headers. Just plain sentences.
 5. Never say you can't answer or that something is out of scope.
@@ -129,7 +129,7 @@ Current slide (context only): "${slideTitle || "Backend Engineering"}"
 
 Question: ${question}
 
-Answer in 2-3 sentences:`;
+Answer in 2-3 polite sentences:`;
 
   try {
     const reply = await callGemini(prompt, 0.5, 150);
@@ -207,7 +207,14 @@ app.post("/api/polish-sentence", async (req: Request, res: Response): Promise<vo
     return;
   }
 
-  const prompt = `Rewrite this one sentence about "${slideTitle || "backend engineering"}" to sound clear and natural when spoken aloud. Output ONLY the rewritten sentence — no extra words, no numbering, no quotes.
+  const prompt = `You are a polite, friendly Indian English narrator for an educational app.
+
+Rewrite this one sentence about "${slideTitle || "backend engineering"}" so it sounds warm, courteous, and natural when spoken aloud in a gentle Indian English accent.
+
+RULES:
+- Use polite, encouraging language (e.g. "Let us", "We can see that", "Do note that", "It is worth mentioning").
+- Write in a calm, teacher-like tone — as if explaining to a student with care.
+- Output ONLY the rewritten sentence — no extra words, no numbering, no quotes.
 
 Original: ${sentence}
 
